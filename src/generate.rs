@@ -42,22 +42,22 @@ fn generate_rule_struct(rule: Rule) -> TokenStream {
     let struct_name = rule.name.to_camel_case();
     let struct_name = make_ident(&struct_name);
     let struct_def = quote! {
-              pub struct #struct_name<'i>(Pair<'i, Rule>);
+          pub struct #struct_name<'i>(Pair<'i, Rule>);
 
-              impl<'i> std::fmt::Debug for #struct_name<'i> {
-                  fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-                        let mut helper = f.debug_tuple(#rule_name);
-                        helper.field(&self.0);
-                        helper.finish()
-                  }
+          impl<'i> std::fmt::Debug for #struct_name<'i> {
+              fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+                    let mut helper = f.debug_tuple(#rule_name);
+                    helper.field(&self.0);
+                    helper.finish()
               }
+          }
 
-              impl<'i> std::clone::Clone for #struct_name<'i> {
-                  fn clone(&self) -> Self {
-                      Self(self.0.clone())
-                  } 
+          impl<'i> std::clone::Clone for #struct_name<'i> {
+              fn clone(&self) -> Self {
+                  Self(self.0.clone())
               }
-        };
+          }
+    };
     let mut out = struct_def;
 
     let common_fns = quote! {
