@@ -3,6 +3,11 @@ name = "pest-typed-tree"
 version = "0.1.0"
 authors = ["Mikail Bagishov <bagishov.mikail@yandex.ru>"]
 edition = "2018"
+description = """
+Generates typed tree, based on grammar, allowing reduce .unwrap() count :)
+"""
+license = "MIT/Apache-2.0"
+repository = "https://github.com/mikailbag/pest-typed-tree"
 
 [lib]
 proc-macro = true
