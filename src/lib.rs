@@ -4,7 +4,6 @@ mod generate;
 
 #[proc_macro_derive(TypedTree, attributes(grammar))]
 pub fn derive_typed_tree(stream: proc_macro::TokenStream) -> proc_macro::TokenStream {
-
     let input = syn::parse_macro_input!(stream as syn::DeriveInput);
     if input.attrs.len() != 1 {
         panic!(r#"derive input must contain exactly once #[grammar = "path/to/pest/grammar""#)
