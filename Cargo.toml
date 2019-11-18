@@ -14,7 +14,7 @@ proc-macro = true
 
 [dependencies]
 pest_meta = "2.1.2"
-syn = {version = "1.0.8", features = ["extra-traits"]}
+syn = "1.0.8"
 quote = "1.0.2"
 heck = "0.3.1"
 proc-macro2 = "1.0.6"
