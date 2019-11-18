@@ -7,6 +7,7 @@ on:
        - trying
 jobs:
   tests:
+    name: tests
     runs-on: ubuntu-latest
     env: 
       CARGO_INCREMENTAL: 0
@@ -32,6 +33,7 @@ jobs:
         with:
           command: test
   clippy:
+    name: clippy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -52,6 +54,7 @@ jobs:
             command: clippy
             args: --tests -- -D warnings -D clippy::all
   fmt:
+    name: fmt
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
