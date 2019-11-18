@@ -50,7 +50,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
             command: clippy
-            args: -- -D warnings -D clippy::all
+            args: --tests -- -D warnings -D clippy::all
   fmt:
     runs-on: ubuntu-latest
     steps:
