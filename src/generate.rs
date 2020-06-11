@@ -286,7 +286,7 @@ fn generate_rule_all_children_iter(rule: &Rule) -> Option<TokenStream> {
         }
         let fn_header = quote! {
             impl<'i> #rule_struct_name<'i> {
-                pub fn into_enum (&self) -> #enum_name {
+                pub fn to_enum (&self) -> #enum_name {
                     let mut pair = self.pairs().next().expect("pest-typed-tree bug");
                     #fn_body
                     panic!("pest-typed-tree bug: this should be unreachable")

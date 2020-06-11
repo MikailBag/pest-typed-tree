@@ -2,6 +2,52 @@ extern crate proc_macro;
 
 mod generate;
 
+/// Generates helper structs for type-safe AST handling.
+/// # Structs
+/// For each rule `pest-typed-tree` will generate struct.
+/// E.g. `foo_rule` -> `FooRule`, and so on.
+/// This struct is wrapper for pest [`Pair`](pest::iterators::Pair) for which
+/// as_rule() == foo_rule holds.
+/// You can create this struct using new() constructor, and get underlying 
+/// pair or text.
+/// # Typed getters
+/// `pest-typed-tree` will generate getters that return child nodes in AST.
+/// Consider following pest grammar:
+/// ```pest
+/// foo = ...
+/// bar = ...
+/// baz = {foo ~ bar?}
+/// ```
+/// Following APIs will be generated:
+/// ```rust,ignore
+/// impl Baz {
+///     fn get_foo(&self) -> Foo;
+///     fn get_bar(&self) -> Option<Bar>;
+/// }
+/// ```
+/// # Converting to enum
+/// If rule is just choice of several unique rules, `pest-typed-tree` will 
+/// generate `to_enum` function that returns enum with actual AST child.
+/// For following grammar:
+/// ```pest
+/// foo = ...
+/// bar = ...
+/// baz = ...
+/// quux = {foo | bar | baz}
+/// ```
+/// Following API will be available
+/// ```rust,ignore
+/// enum QuuxChildren {
+///     Foo(Foo),
+///     Bar(Bar),
+///     Baz(Baz),
+/// }
+/// impl Quux {
+///     fn to_enum(&self) -> QuuxChildren;
+/// }
+/// ```
+/// See test `complex.rs` for typed getters and enum conversion usage examples.
+
 #[proc_macro_derive(TypedTree, attributes(grammar))]
 pub fn derive_typed_tree(stream: proc_macro::TokenStream) -> proc_macro::TokenStream {
     let input = syn::parse_macro_input!(stream as syn::DeriveInput);

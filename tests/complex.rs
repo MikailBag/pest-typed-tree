@@ -31,7 +31,7 @@ CONST_OPT quux 57
     assert_eq!(root_node.text(), data);
     let mut sum = 0;
     for def in root_node.list_definition() {
-        match def.into_enum() {
+        match def.to_enum() {
             nodes::DefinitionChildren::DefConst(def_const) => {
                 sum += def_const.get_num().value();
             }
