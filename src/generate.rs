@@ -215,9 +215,6 @@ fn is_rule_special(name: &str) -> bool {
 fn is_disjoint_choice(rule: &Rule) -> (bool, HashSet<String>) {
     let mut used = HashSet::new();
     let ok = is_disjoint_choice_inner(&rule.expr, &mut used);
-    if rule.name == "definition" && !ok {
-        panic!("{:?} {:?}", used, rule.expr);
-    }
     (ok, used)
 }
 
