@@ -440,8 +440,7 @@ pub fn generate(grammar: String) -> proc_macro::TokenStream {
     // now let's wrap it into module
     let mut out: TokenStream = quote! {
         mod nodes
-    }
-    .into();
+    };
 
     let braced_def = TokenTree::Group(proc_macro2::Group::new(
         proc_macro2::Delimiter::Brace,
